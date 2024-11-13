@@ -1,11 +1,8 @@
-import { LoginForm } from "@/components/login-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import LoginForm from "@/components/auth/login-form";
 
 export default function Login() {
   return (
-    <div className="flex h-screen w-full items-center justify-center px-4">
+    <div className="flex justify-center items-center h-screen bg-login bg-cover">
       <LoginForm />
     </div>
   );

@@ -56,6 +56,11 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      backgroundImage: {
+        login: "url('/login.png')",
+        "landing-page": "url('/landing-page-2.svg')",
+        "landing-page-mobile": "url('/landing-page-mobile-2.svg')",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
