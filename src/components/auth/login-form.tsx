@@ -40,7 +40,7 @@ export default function LoginForm() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Values: ", values);
-    router.push("/");
+    router.push("/app");
   }
 
   return (
