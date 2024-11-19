@@ -30,6 +30,7 @@ export function DialogCard() {
         </DialogHeader>
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Cards</Label>
+          <div></div>
         </div>
         <DialogFooter>
           <DialogClose asChild>

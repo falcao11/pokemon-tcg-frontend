@@ -5,6 +5,7 @@ interface VisualCardCollectionProps {
   collection: {
     collection_id: string;
     name: string;
+    set_name: string;
     img_url: string;
   };
 }
@@ -24,12 +25,15 @@ export default function VisualCardCollection({
       className="flex flex-col gap-4 items-center bg-white rounded-xl p-6 w-full border shadow-lg cursor-pointer hover:shadow-xl"
       onClick={handleCollection}
     >
-      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-        {collection.name}
-      </h3>
+      <div className="flex flex-col gap-0 items-center">
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          {collection.name}
+        </h3>
+        <p className="text-base font-light">{collection.set_name}</p>
+      </div>
       <Image
         src={collection.img_url}
-        alt="charizard"
+        alt={collection.name}
         width={200}
         height={200}
       />

@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus } from "lucide-react";
-import { ComboboxSet } from "./combobox-set";
+import { ComboboxSet } from "../combobox/combobox-set";
 
 export function DialogCollection() {
   return (

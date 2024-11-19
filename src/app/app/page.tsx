@@ -1,19 +1,11 @@
 "use client";
-import { DialogCollection } from "@/components/dialog-collection";
-import VisualCardCollection from "@/components/visual-card-collection";
-import { useRouter } from "next/navigation";
+import { DialogCollection } from "@/components/dialog/dialog-collection";
+import VisualCardCollection from "@/components/visual-card/visual-card-collection";
 
-export default function Home() {
-  const router = useRouter();
-
-  function handleLogOut() {
-    console.log("Logging out");
-    router.push("/");
-  }
-
+export default function Collection() {
   return (
-    <>
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col gap-10">
+      <div className="flex justify-between items-center ">
         <h2 className="scroll-m-20 pb-2 text-3xl font-bold first:mt-0">
           My Collections
         </h2>
@@ -23,12 +15,116 @@ export default function Home() {
         <VisualCardCollection
           collection={{
             collection_id: "1",
-            name: "costas",
-            img_url:
-              "https://commondatastorage.googleapis.com/images.pricecharting.com/619ed3bf5b5045faf18d7f0d3f265b4fea979dfc4509cfacb017bed8bc293bcf/1600.jpg",
+            name: "Lost Origin",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "2",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "3",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "4",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "5",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "6",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "7",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "8",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "9",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "10",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "11",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "12",
+            name: "Lost Origin Repetidoscca casc a gv ag va fsfc ",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "13",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
+          }}
+        />
+        <VisualCardCollection
+          collection={{
+            collection_id: "14",
+            name: "Lost Origin Repetidos",
+            set_name: "Lost Origin",
+            img_url: "/pokemon-tcg.png",
           }}
         />
       </div>
-    </>
+    </div>
   );
 }

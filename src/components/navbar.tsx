@@ -13,7 +13,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="flex flex-row justify-between items-center bg-slate-500 px-4 py-2 border-b shadow-lg">
+    <div className="flex flex-row justify-between items-center px-4 py-2 border-b shadow-lg">
       <Image src="/pokemon-tcg.png" alt="logo" width={140} height={140} />
       <div className="flex flex-row gap-10">
         <AvatarUser />
