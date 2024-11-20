@@ -1,5 +1,6 @@
 "use client";
 
+import Register from "@/app/_https/create-user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,10 +21,10 @@ import { Input } from "../ui/input";
 
 const formSchema = z
   .object({
+    username: z.string().trim(),
     email: z.string().email({
       message: "Please enter a valid email",
     }),
-    username: z.string().trim(),
     password: z.string().min(4, {
       message: "Password must be at least 4 characters",
     }),
@@ -37,23 +38,45 @@ const formSchema = z
   });
 
 export default function SignUpForm() {
-  const [visible, setVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
       username: "",
+      email: "",
       password: "",
       confirm_password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Values: ", values);
-    router.push("/login");
+    setErrorMessage("");
+    const result = await Register(values);
+    if (result.success === false) {
+      //console.log("Error creating user");
+      //setErrorMessage(result.message);
+
+      if (result.message.includes("Username")) {
+        //console.log("Username error");
+        form.setError("username", {
+          type: "string",
+          message: result.message,
+        });
+      } else if (result.message.includes("Email")) {
+        //console.log("Email error");
+        form.setError("email", {
+          type: "string",
+          message: result.message,
+        });
+      }
+    } else {
+      //console.log("User created successfully");
+      router.push("/login");
+    }
   }
 
   return (
@@ -61,6 +84,11 @@ export default function SignUpForm() {
       <CardHeader className="flex items-center">
         <img src="/pokemon-tcg.png" alt="Pokemon TCG" width={160} />
       </CardHeader>
+      {errorMessage && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+          {errorMessage}
+        </div>
+      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
