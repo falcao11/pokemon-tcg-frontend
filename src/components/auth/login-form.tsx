@@ -1,5 +1,6 @@
 "use client";
 
+import Login from "@/app/_https/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,10 +38,23 @@ export default function LoginForm() {
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Values: ", values);
-    router.push("/app");
+    try {
+      await Login(values);
+      console.log("Login successful");
+      router.push("/app");
+    } catch (error: any) {
+      console.log("Error logging in");
+      form.setError("email", {
+        type: "string",
+        message: error.message,
+      });
+      form.setError("password", {
+        type: "string",
+        message: "",
+      });
+    }
   }
 
   return (

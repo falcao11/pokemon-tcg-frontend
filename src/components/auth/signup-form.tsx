@@ -4,7 +4,6 @@ import Register from "@/app/_https/create-user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
@@ -38,8 +37,6 @@ const formSchema = z
   });
 
 export default function SignUpForm() {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,7 +51,6 @@ export default function SignUpForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Values: ", values);
-    setErrorMessage("");
     const result = await Register(values);
     if (result.success === false) {
       //console.log("Error creating user");
@@ -84,11 +80,6 @@ export default function SignUpForm() {
       <CardHeader className="flex items-center">
         <img src="/pokemon-tcg.png" alt="Pokemon TCG" width={160} />
       </CardHeader>
-      {errorMessage && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-          {errorMessage}
-        </div>
-      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
