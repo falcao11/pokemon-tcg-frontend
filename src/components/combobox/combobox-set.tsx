@@ -3,6 +3,7 @@
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
+import { getAllSets } from "@/app/_https/get-all-sets";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,31 +19,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-
-const frameworks = [
-  {
-    value: "set-1",
-    label: "Set 1",
-  },
-  {
-    value: "set-2",
-    label: "Set 2",
-  },
-  {
-    value: "set-3",
-    label: "Set 3",
-  },
-  {
-    value: "set-4",
-    label: "Set 4",
-  },
-  {
-    value: "set-5",
-    label: "Set 5",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
 
 export function ComboboxSet() {
+  const { data } = useQuery({
+    queryKey: ["sets"],
+    queryFn: getAllSets,
+    staleTime: 1000 * 60, // 60 seconds
+  });
+
+  const sets = Array.isArray(data) ? data : [];
+
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -53,34 +40,33 @@ export function ComboboxSet() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="col-span-3 justify-between"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select Set..."}
+          {value ? sets.find((set) => set.id === value)?.name : "Select Set..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="col-span-3 p-0">
         <Command>
           <CommandInput placeholder="Search Set..." />
           <CommandList>
             <CommandEmpty>No Set found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {sets.map((set) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={set.id}
+                  value={set.id}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
+                    console.log("Selected Set: ", value);
                   }}
                 >
-                  {framework.label}
+                  {set.name}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === set.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
