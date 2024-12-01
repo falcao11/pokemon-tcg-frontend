@@ -21,7 +21,11 @@ import {
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 
-export function ComboboxSet() {
+interface SetProps {
+  onSelect: (set_id: string) => void;
+}
+
+export function ComboboxSet({ onSelect }: SetProps) {
   const { data } = useQuery({
     queryKey: ["sets"],
     queryFn: getAllSets,
@@ -42,7 +46,9 @@ export function ComboboxSet() {
           aria-expanded={open}
           className="col-span-3 justify-between"
         >
-          {value ? sets.find((set) => set.id === value)?.name : "Select Set..."}
+          {value
+            ? sets.find((set) => set.name === value)?.name
+            : "Select Set..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -55,11 +61,12 @@ export function ComboboxSet() {
               {sets.map((set) => (
                 <CommandItem
                   key={set.id}
-                  value={set.id}
+                  value={set.name}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
-                    console.log("Selected Set: ", value);
+                    onSelect(set.id);
+                    console.log("Selected Set: ", set.id);
                   }}
                 >
                   {set.name}

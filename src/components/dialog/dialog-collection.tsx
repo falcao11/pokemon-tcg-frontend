@@ -44,22 +44,7 @@ export function DialogCollection() {
     console.log("Values: ", values);
     const result = await CreateCollection(values);
     if (result.success === false) {
-      //console.log("Error creating user");
-      //setErrorMessage(result.message);
-
-      if (result.message.includes("Username")) {
-        //console.log("Username error");
-        form.setError("name", {
-          type: "string",
-          message: result.message,
-        });
-      } else if (result.message.includes("Email")) {
-        //console.log("Email error");
-        form.setError("set_id", {
-          type: "string",
-          message: result.message,
-        });
-      }
+      console.log("Error creating user");
     } else {
       console.log("Collection created successfully");
     }
@@ -102,7 +87,9 @@ export function DialogCollection() {
                 <FormItem className="flex flex-col">
                   <FormLabel>Set</FormLabel>
                   <FormControl>
-                    <ComboboxSet />
+                    <ComboboxSet
+                      onSelect={(set_id: string) => field.onChange(set_id)}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
