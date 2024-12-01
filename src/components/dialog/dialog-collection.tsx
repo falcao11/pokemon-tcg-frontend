@@ -10,8 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ComboboxSet } from "../combobox/combobox-set";
@@ -30,7 +31,8 @@ const formSchema = z.object({
 });
 
 export function DialogCollection() {
-  const router = useRouter();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,11 +49,13 @@ export function DialogCollection() {
       console.log("Error creating user");
     } else {
       console.log("Collection created successfully");
+      queryClient.invalidateQueries({ queryKey: ["collections"] });
+      setOpen(false);
     }
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
           Create Collection
