@@ -1,4 +1,4 @@
-export interface SetTypes {
+export interface SetInterface {
   set_id: string;
   name: string;
   images?: {

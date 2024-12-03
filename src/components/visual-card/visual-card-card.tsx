@@ -1,18 +1,7 @@
 "use client";
 
+import { VisualCardInterface } from "@/app/_interface/visual-card-interface";
 import Image from "next/image";
-
-interface VisualCardProps {
-  card: {
-    card_id: string;
-    name: string;
-    img_url: string;
-  };
-  onClick: () => void;
-  isSelected: boolean;
-  isUpdated: boolean;
-  isEditMode: boolean;
-}
 
 export default function VisualCard({
   card,
@@ -20,19 +9,22 @@ export default function VisualCard({
   isSelected,
   isUpdated,
   isEditMode,
-}: VisualCardProps) {
+}: VisualCardInterface) {
   return (
-    <div
-      className={`shadow-lg cursor-pointer transform transition duration-400 ease-in-out 
+    <div>
+      <h1>{card.name}</h1>
+      <div
+        className={`shadow-lg cursor-pointer transform transition duration-400 ease-in-out 
         ${
           isEditMode
             ? `${isUpdated ? "opacity-100" : "opacity-60"}`
             : `${isSelected ? "opacity-100" : "opacity-60"}`
         }
-`}
-      onClick={onClick}
-    >
-      <Image src={card.img_url} alt={card.name} width={200} height={200} />
+        `}
+        onClick={onClick}
+      >
+        <Image src={card.img_url} alt={card.name} width={200} height={200} />
+      </div>
     </div>
   );
 }

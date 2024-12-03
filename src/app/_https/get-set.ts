@@ -1,6 +1,6 @@
-import { SetTypes } from "../_types/set-types";
+import { SetInterface } from "../_interface/set-interface";
 
-export async function getSet(id: string): Promise<SetTypes> {
+export async function getSet(id: string): Promise<SetInterface> {
   const response = await fetch("https://api.pokemontcg.io/v2/sets/" + id);
   const result = await response.json();
   console.log("Set: ", result.data);

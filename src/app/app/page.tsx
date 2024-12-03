@@ -2,8 +2,8 @@
 import Collections from "@/components/collections";
 import { DialogCollection } from "@/components/dialog/dialog-collection";
 import EmptyCollections from "@/components/empty-collections";
+import LoaderComponent from "@/components/loader-component";
 import { useQuery } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
 import { getAllCollections } from "../_https/get-all-collections";
 // import VisualCardCollection from "@/components/visual-card/visual-card-collection";
 
@@ -26,9 +26,7 @@ export default function Collection() {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center items-center">
-          <Loader size={50} className="animate-spin" />
-        </div>
+        <LoaderComponent />
       ) : collectionsNumber > 0 ? (
         <Collections />
       ) : (

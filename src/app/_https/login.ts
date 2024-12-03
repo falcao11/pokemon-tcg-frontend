@@ -1,10 +1,10 @@
 "use server";
 import axios from "axios";
 import { cookies } from "next/headers";
-import { LoginType } from "../_types/login-types";
+import { LoginInterface } from "../_interface/login-interface";
 import api from "../services/api";
 
-export default async function Login({ email, password }: LoginType) {
+export default async function Login({ email, password }: LoginInterface) {
   try {
     const response = await api.post("/login", {
       email: email,

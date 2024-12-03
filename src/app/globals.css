@@ -27,7 +27,8 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --success: 120 60% 50%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -53,18 +54,18 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
+    --success: 120 60% 50%;
   }
 }
 @layer base {
   * {
     @apply border-border;
-    @apply  m-0;
-    @apply  p-0;
-    @apply  box-border;
+    @apply m-0;
+    @apply p-0;
+    @apply box-border;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
-

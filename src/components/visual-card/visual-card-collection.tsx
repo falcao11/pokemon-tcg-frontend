@@ -1,18 +1,10 @@
+import { VisualCollectionInterface } from "@/app/_interface/visual-collection";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-interface VisualCardCollectionProps {
-  collection: {
-    collection_id: string;
-    name: string;
-    set_name: string;
-    img_url: string;
-  };
-}
-
 export default function VisualCardCollection({
   collection,
-}: VisualCardCollectionProps) {
+}: VisualCollectionInterface) {
   const router = useRouter();
 
   function handleCollection() {

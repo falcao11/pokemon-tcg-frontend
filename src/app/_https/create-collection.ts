@@ -2,10 +2,10 @@
 
 import axios from "axios";
 import { cookies } from "next/headers";
-import { SetTypes } from "../_types/set-types";
+import { SetInterface } from "../_interface/set-interface";
 import api from "../services/api";
 
-export default async function CreateCollection({ set_id, name }: SetTypes) {
+export default async function CreateCollection({ set_id, name }: SetInterface) {
   try {
     const cookie = (await cookies()).get("access_token")?.value;
     const response = await api.post(

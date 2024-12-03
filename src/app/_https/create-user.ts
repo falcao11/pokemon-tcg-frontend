@@ -1,8 +1,8 @@
 import axios from "axios";
-import { SignUpType } from "../_types/signup-types";
+import { SignUpInterface } from "../_interface/signup-interface";
 import api from "../services/api";
 
-export default async function Register({ ...props }: SignUpType) {
+export default async function Register({ ...props }: SignUpInterface) {
   try {
     const response = await api.post("/signup", {
       username: props.username,
