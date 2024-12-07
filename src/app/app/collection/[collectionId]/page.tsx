@@ -4,13 +4,15 @@ import { getCollection } from "@/app/_https/get-collection";
 import CardsCollection from "@/components/cards-collection";
 import LoaderComponent from "@/components/loader-component";
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Check, Pencil, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Collection() {
+  const queryClient = useQueryClient();
   const route = useRouter();
+
   const params = useParams<{ collectionId: string }>();
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -18,10 +20,12 @@ export default function Collection() {
 
   const isUpdatedCardSelected = (cardId: string) =>
     updateSelectCards.includes(cardId);
+
   const isCardSelected = (cardId: string) => selectedCards.includes(cardId);
 
   const handleCardClick = (cardId: string) => {
     if (isEditMode) {
+      console.log("Card clicked is: ", cardId);
       setUpdateSelectCards((prevSelectedCards) =>
         prevSelectedCards.includes(cardId)
           ? prevSelectedCards.filter((id) => id !== cardId)
@@ -36,10 +40,24 @@ export default function Collection() {
     setIsEditMode(true);
   }
 
-  function handlelDeleteClick() {
-    console.log("Delete clicked");
-    route.push("/app");
-  }
+  // async function handlelDeleteClick(collection_id: string) {
+  //   console.log("Delete clicked");
+  //   queryClient.invalidateQueries({
+  //     queryKey: ["collection", params.collectionId],
+  //   });
+  //   const response = await DeleteCollection(collection_id);
+  //   if (response.status === 200) {
+  //     console.log("Collection deleted");
+
+  //     queryClient.invalidateQueries({ queryKey: ["collections"] });
+  //     route.push("/app");
+  //   } else {
+  //     toast({
+  //       variant: "destructive",
+  //       description: "Error on delete collection",
+  //     });
+  //   }
+  // }
 
   function handleSaveClick() {
     console.log("Save clicked");
@@ -55,7 +73,7 @@ export default function Collection() {
   }
 
   const { data, isLoading } = useQuery({
-    queryKey: ["collections", params.collectionId],
+    queryKey: ["collection", params.collectionId],
     queryFn: () => getCollection(params.collectionId),
     staleTime: 1000 * 60, // 60 seconds
   });
@@ -88,19 +106,22 @@ export default function Collection() {
                     Edit
                     <Pencil />
                   </Button>
-                  <Button variant={"destructive"} onClick={handlelDeleteClick}>
+                  {/* <Button
+                    variant={"destructive"}
+                    onClick={() => handlelDeleteClick(params.collectionId)}
+                  >
                     Delete
                     <X />
-                  </Button>
+                  </Button> */}
                 </div>
               )}
             </div>
           </div>
           <CardsCollection
             set_id={data.set_id}
-            onClick={() => handleCardClick("1")}
-            isSelected={isCardSelected("1")}
-            isUpdated={isUpdatedCardSelected("1")}
+            onClick={handleCardClick}
+            isSelected={isCardSelected}
+            isUpdated={isUpdatedCardSelected}
             isEditMode={isEditMode}
           />
           {/* <div className="grid grid-cols-10 gap-10 justify-center">

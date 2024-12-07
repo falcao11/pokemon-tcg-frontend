@@ -1,14 +1,14 @@
 import getCardsCollection from "@/app/_https/get-cards-collection";
 import { useQuery } from "@tanstack/react-query";
 import LoaderComponent from "./loader-component";
-import VisualCard from "./visual-card/visual-card-card";
+import VisualCard from "./visual/visual-card";
 
 interface SetProps {
   set_id: string;
   isEditMode: boolean;
-  isSelected: boolean;
-  isUpdated: boolean;
-  onClick: () => void;
+  isSelected: (card_id: string) => boolean;
+  isUpdated: (card_id: string) => boolean;
+  onClick: (card_id: string) => void;
 }
 
 export default function CardsCollection({
@@ -39,9 +39,9 @@ export default function CardsCollection({
                   name: card.name,
                   img_url: card.images.small,
                 }}
-                onClick={onClick}
-                isSelected={isSelected}
-                isUpdated={isUpdated}
+                onClick={() => onClick(card.id)}
+                isSelected={isSelected(card.id)}
+                isUpdated={isUpdated(card.id)}
                 isEditMode={isEditMode}
               />
             );
