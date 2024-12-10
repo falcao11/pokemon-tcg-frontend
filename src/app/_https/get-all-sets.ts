@@ -1,8 +1,15 @@
-import { SetInterface } from "../_interface/set-interface";
+import api from "../services/api";
+import Cookies from "../services/cookies";
 
-export async function getAllSets(): Promise<SetInterface> {
-  const response = await fetch("https://api.pokemontcg.io/v2/sets");
-  const result = await response.json();
-  console.log("All Set: ", result.data);
-  return result.data;
+export async function getAllSets() {
+  const cookie = Cookies();
+
+  const response = await api.get("/sets", {
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  console.log("Response getAllSets: ", response.data);
+
+  return response.data.data;
 }

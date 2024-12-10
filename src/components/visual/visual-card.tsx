@@ -11,8 +11,7 @@ export default function VisualCard({
   isEditMode,
 }: VisualCardInterface) {
   return (
-    <div>
-      <h1>{card.name}</h1>
+    <div className="border rounded py-2 px-4 shadow-lg cursor-pointer flex flex-col gap-2">
       <div
         className={`shadow-lg cursor-pointer transform transition duration-400 ease-in-out 
         ${
@@ -25,6 +24,7 @@ export default function VisualCard({
       >
         <Image src={card.img_url} alt={card.name} width={200} height={200} />
       </div>
+      <h1 className="text-center font-bold">{card.name}</h1>
     </div>
   );
 }

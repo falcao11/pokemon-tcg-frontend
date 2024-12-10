@@ -12,9 +12,21 @@ export default function Navbar() {
     router.push("/");
   }
 
+  function handleHome() {
+    console.log("Home clicked");
+    router.push("/app");
+  }
+
   return (
     <div className="flex flex-row justify-between items-center px-4 py-2 border-b shadow-lg">
-      <Image src="/pokemon-tcg.png" alt="logo" width={140} height={140} />
+      <Image
+        className="cursor-pointer"
+        src="/pokemon-tcg.png"
+        alt="logo"
+        width={140}
+        height={140}
+        onClick={handleHome}
+      />
       <div className="flex flex-row gap-10">
         <AvatarUser />
         <Button onClick={handleLogOut}>Logout</Button>

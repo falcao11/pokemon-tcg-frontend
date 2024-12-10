@@ -1,8 +1,15 @@
+import api from "../services/api";
+import Cookies from "../services/cookies";
+
 export default async function getCardsCollection(set_id: string) {
-  const response = await fetch(
-    "https://api.pokemontcg.io/v2/cards?q=set.id:" + set_id + "&orderBy=number"
-  );
-  const result = await response.json();
-  console.log("Cards Collection: ", result.data);
-  return result.data;
+  const cookie = Cookies();
+
+  const response = await api.get("/cards/" + set_id, {
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  console.log("Response getCardsCollection: ", response.data.data);
+
+  return response.data.data;
 }

@@ -1,11 +1,10 @@
-"use server";
-import { cookies } from "next/headers";
 import api from "../services/api";
+import Cookies from "../services/cookies";
 
 export default async function DeleteCollection(
   collection_id: string
 ): Promise<number> {
-  const cookie = (await cookies()).get("access_token")?.value;
+  const cookie = Cookies();
 
   const response = await api.delete("collections/" + collection_id, {
     headers: {

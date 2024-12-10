@@ -29,7 +29,7 @@ export default function CardsCollection({
       {isLoading ? (
         <LoaderComponent />
       ) : (
-        <div className="grid grid-cols-10 gap-10 justify-center">
+        <div className="grid grid-cols-8 gap-10 justify-center">
           {data.map((card: any) => {
             return (
               <VisualCard

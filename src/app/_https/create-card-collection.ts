@@ -1,16 +1,19 @@
 import axios from "axios";
-import { SetInterface } from "../_interface/set-interface";
+import { CardCollectionInterface } from "../_interface/card-collection";
 import api from "../services/api";
 import Cookies from "../services/cookies";
 
-export default async function CreateCollection({ set_id, name }: SetInterface) {
+export default async function CreateCardCollection({
+  cards,
+  collection_id,
+}: CardCollectionInterface) {
   try {
+    console.log("Card ID: ", cards);
     const cookie = Cookies();
     const response = await api.post(
-      "/collections",
+      "/collections/" + collection_id + "/cards",
       {
-        name: name,
-        set_id: set_id,
+        cards: cards,
       },
       {
         headers: {
@@ -19,7 +22,7 @@ export default async function CreateCollection({ set_id, name }: SetInterface) {
       }
     );
     console.log("Response: ", response);
-    return response.data;
+    return response.status;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       console.log("Error: ", error.response.data.message);

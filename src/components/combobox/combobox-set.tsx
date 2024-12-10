@@ -20,13 +20,14 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import LoaderComponent from "../loader-component";
 
 interface SetProps {
   onSelect: (set_id: string) => void;
 }
 
 export function ComboboxSet({ onSelect }: SetProps) {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["sets"],
     queryFn: getAllSets,
     staleTime: 1000 * 60, // 60 seconds
@@ -58,26 +59,30 @@ export function ComboboxSet({ onSelect }: SetProps) {
           <CommandList>
             <CommandEmpty>No Set found.</CommandEmpty>
             <CommandGroup>
-              {sets.map((set) => (
-                <CommandItem
-                  key={set.id}
-                  value={set.name}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
-                    onSelect(set.id);
-                    console.log("Selected Set: ", set.id);
-                  }}
-                >
-                  {set.name}
-                  <Check
-                    className={cn(
-                      "ml-auto",
-                      value === set.id ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
+              {isLoading ? (
+                <LoaderComponent />
+              ) : (
+                sets.map((set) => (
+                  <CommandItem
+                    key={set.id}
+                    value={set.name}
+                    onSelect={(currentValue) => {
+                      setValue(currentValue === value ? "" : currentValue);
+                      setOpen(false);
+                      onSelect(set.id);
+                      console.log("Selected Set: ", set.id);
+                    }}
+                  >
+                    {set.name}
+                    <Check
+                      className={cn(
+                        "ml-auto",
+                        value === set.id ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))
+              )}
             </CommandGroup>
           </CommandList>
         </Command>

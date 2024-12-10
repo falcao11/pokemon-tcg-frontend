@@ -1,10 +1,9 @@
-"use server";
-import { cookies } from "next/headers";
 import api from "../services/api";
+import Cookies from "../services/cookies";
 
 export async function getAllCollections(): Promise<string> {
   // console.log("Api URL: ", process.env.NEXT_PUBLIC_DATABASE_URL);
-  const cookie = (await cookies()).get("access_token")?.value;
+  const cookie = Cookies();
 
   const response = await api.get("collections", {
     headers: {
