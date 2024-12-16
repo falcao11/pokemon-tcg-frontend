@@ -1,4 +1,5 @@
 "use client";
+import LogOut from "@/app/_https/logout";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AvatarUser } from "./avatar-user";
@@ -7,9 +8,10 @@ import { Button } from "./ui/button";
 export default function Navbar() {
   const router = useRouter();
 
-  function handleLogOut() {
+  async function handleLogOut() {
     console.log("Logging out");
-    router.push("/");
+    const response = await LogOut();
+    if (response) router.push("/login");
   }
 
   function handleHome() {
