@@ -5,7 +5,7 @@ import Cookies from "../services/cookies";
 export async function getCollection(collection_id: string) {
   try {
     // console.log("Api URL: ", process.env.NEXT_PUBLIC_DATABASE_URL);
-    const cookie = Cookies();
+    const cookie = await Cookies();
 
     const response = await api.get("collections/" + collection_id, {
       headers: {

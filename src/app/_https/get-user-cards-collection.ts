@@ -5,7 +5,7 @@ import Cookies from "../services/cookies";
 export default async function userCardsCollection(
   id: string
 ): Promise<CardInterface> {
-  const cookie = Cookies();
+  const cookie = await Cookies();
 
   const response = await api.get("/collections/" + id + "/cards", {
     headers: {

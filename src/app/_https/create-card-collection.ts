@@ -9,7 +9,7 @@ export default async function CreateCardCollection({
 }: CardCollectionInterface) {
   try {
     console.log("Card ID: ", cards);
-    const cookie = Cookies();
+    const cookie = await Cookies();
     const response = await api.post(
       "/collections/" + collection_id + "/cards",
       {

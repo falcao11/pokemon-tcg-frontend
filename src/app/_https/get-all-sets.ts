@@ -2,7 +2,7 @@ import api from "../services/api";
 import Cookies from "../services/cookies";
 
 export async function getAllSets() {
-  const cookie = Cookies();
+  const cookie = await Cookies();
 
   const response = await api.get("/sets", {
     headers: {

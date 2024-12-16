@@ -8,7 +8,7 @@ export async function getSet(id: string): Promise<SetInterface> {
   // console.log("Set: ", result.data);
   // return result.data;
 
-  const cookie = Cookies();
+  const cookie = await Cookies();
 
   const response = await api.get("/sets/" + id, {
     headers: {

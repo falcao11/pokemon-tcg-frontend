@@ -5,7 +5,7 @@ import Cookies from "../services/cookies";
 
 export default async function CreateCollection({ set_id, name }: SetInterface) {
   try {
-    const cookie = Cookies();
+    const cookie = await Cookies();
     const response = await api.post(
       "/collections",
       {
