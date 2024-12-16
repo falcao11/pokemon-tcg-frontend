@@ -22,7 +22,13 @@ export default function VisualCard({
         `}
         onClick={onClick}
       >
-        <Image src={card.img_url} alt={card.name} width={200} height={200} />
+        <Image
+          src={card.img_url}
+          alt={card.name}
+          width={200}
+          height={200}
+          priority
+        />
       </div>
       <h1 className="text-center font-bold">{card.name}</h1>
     </div>

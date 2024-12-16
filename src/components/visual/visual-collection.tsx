@@ -58,6 +58,7 @@ export default function VisualCollection({
           alt={collection.name}
           width={200}
           height={200}
+          priority
         />
       </div>
     </div>

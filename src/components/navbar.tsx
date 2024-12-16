@@ -28,6 +28,7 @@ export default function Navbar() {
         width={140}
         height={140}
         onClick={handleHome}
+        priority
       />
       <div className="flex flex-row gap-10">
         <AvatarUser />
