@@ -12,18 +12,18 @@ export async function getCollection(collection_id: string) {
         Authorization: `Bearer ${cookie}`,
       },
     });
-    console.log("Response getCollection: Cheguei");
+    // console.log("Response getCollection: Cheguei");
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      console.log("Error getCollection: ", error.response.data);
+      // console.log("Error getCollection: ", error.response.data);
       return {
         success: false,
         status: error.response.status,
         message: error.response.data.message,
       };
     } else {
-      console.log("Error getCollection: ", error);
+      // console.log("Error getCollection: ", error);
       return {
         success: false,
         message: "An unexpected error occurred",

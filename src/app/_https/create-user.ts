@@ -3,11 +3,19 @@ import { SignUpInterface } from "../_interface/signup-interface";
 import api from "../services/api";
 
 export default async function Register({ ...props }: SignUpInterface) {
+  // console.log("Props: ", props.image?.name);
   try {
+    // const image = await api.post("/signup/upload", {
+    //   file: props.image,
+    // });
+
+    // console.log("Image: ", image.data.image);
+
     const response = await api.post("/signup", {
       username: props.username,
       email: props.email,
       password: props.password,
+      // image: image.data.image,
     });
     console.log("Response: ", response);
     return response.data;

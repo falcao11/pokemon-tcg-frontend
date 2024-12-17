@@ -14,7 +14,7 @@ export default async function Login({ email, password }: LoginInterface) {
     // Assuming the response contains an access token
     const accessToken = response.data.access_token;
 
-    console.log("Access Token: ", accessToken);
+    // console.log("Access Token: ", accessToken);
 
     //Set the cookie with the access token
     (await cookies()).set("access_token", accessToken, {

@@ -24,6 +24,7 @@ const formSchema = z
     email: z.string().email({
       message: "Please enter a valid email",
     }),
+    // image: z.instanceof(File),
     password: z.string().min(4, {
       message: "Password must be at least 4 characters",
     }),
@@ -44,6 +45,7 @@ export default function SignUpForm() {
     defaultValues: {
       username: "",
       email: "",
+      // image: undefined,
       password: "",
       confirm_password: "",
     },
@@ -108,6 +110,23 @@ export default function SignUpForm() {
               </FormItem>
             )}
           />
+          {/* <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Profile Picture</FormLabel>
+                <FormControl>
+                  <Input
+                    type="file"
+                    required
+                    onChange={(e) => field.onChange(e.target.files?.[0])}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
           <FormField
             control={form.control}
             name="password"
