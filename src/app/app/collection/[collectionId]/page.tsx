@@ -12,6 +12,8 @@ export default function Collection() {
   const params = useParams<{ collectionId: string }>();
   const [receiveLoading, setReceiveLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [zuidi, setZuidi] = useState<boolean>(false);
+  const [zuidi2, setZuidi2] = useState<boolean>(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["collection", params.collectionId],
