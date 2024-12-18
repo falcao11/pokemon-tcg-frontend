@@ -1,15 +1,9 @@
 import getCardsCollection from "@/app/_https/get-cards-collection";
+import { SetProps } from "@/app/_interface/set-props";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import LoaderComponent from "./loader-component";
 import VisualCard from "./visual/visual-card";
-
-interface SetProps {
-  set_id: string;
-  isEditMode: boolean;
-  isSelected: (card_id: string) => boolean;
-  isUpdated: (card_id: string) => boolean;
-  onClick: (card_id: string) => void;
-}
 
 export default function CardsCollection({
   set_id,
@@ -17,6 +11,7 @@ export default function CardsCollection({
   isSelected,
   isUpdated,
   onClick,
+  onLengthChange,
 }: SetProps) {
   const { data, isLoading } = useQuery({
     queryKey: ["cards", set_id],
@@ -24,13 +19,19 @@ export default function CardsCollection({
     staleTime: 1000 * 60, // 60 seconds
   });
 
+  useEffect(() => {
+    if (data) {
+      onLengthChange(data.cards.length);
+    }
+  }, [data, onLengthChange]);
+
   return (
     <>
       {isLoading ? (
         <LoaderComponent />
       ) : (
         <div className="grid grid-cols-8 gap-10 justify-center">
-          {data.map((card: any) => {
+          {data?.cards.map((card: any) => {
             return (
               <VisualCard
                 key={card.id}
