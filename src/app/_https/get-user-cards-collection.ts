@@ -1,10 +1,10 @@
-import { CardInterface } from "../_interface/card-interface";
+import UserCardsResponse from "../_interface/user-cards-response";
 import api from "../services/api";
 import Cookies from "../services/cookies";
 
 export default async function userCardsCollection(
   id: string
-): Promise<CardInterface> {
+): Promise<UserCardsResponse> {
   const cookie = await Cookies();
 
   const response = await api.get("/collections/" + id + "/cards", {
@@ -13,6 +13,8 @@ export default async function userCardsCollection(
     },
   });
   console.log("Response UserCardsCollection: ", response);
+  console.log("Response UserCardsCollection Data: ", response.data.length);
+  const length = response.data.length;
   const cards = response.data.map((card: any) => {
     return {
       card_collection_id: card.card_collection_id,
@@ -21,5 +23,5 @@ export default async function userCardsCollection(
     };
   });
 
-  return cards;
+  return { cards, length };
 }

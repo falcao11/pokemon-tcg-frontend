@@ -9,7 +9,10 @@ export default async function getCardsCollection(set_id: string) {
       Authorization: `Bearer ${cookie}`,
     },
   });
-  console.log("Response getCardsCollection: ", response.data.data);
+  // console.log("Response getCardsCollection: ", response.data.data);
+  // console.log("Response getCardsCollection: ", response.data.data.length);
+  const cards = response.data.data;
+  const length = cards.length;
 
-  return response.data.data;
+  return { cards, length };
 }

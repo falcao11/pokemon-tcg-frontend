@@ -17,6 +17,8 @@ export default function AllCardsCollection({
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [updateSelectCards, setUpdateSelectCards] = useState<string[]>([]);
+  const [length, setLength] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { data } = useQuery({
     queryKey: ["cards-collection", params.collectionId],
@@ -25,8 +27,8 @@ export default function AllCardsCollection({
   });
 
   useEffect(() => {
-    if (Array.isArray(data)) {
-      const cards = data.map((card: any) => card.card_id);
+    if (Array.isArray(data?.cards)) {
+      const cards = data?.cards.map((card: any) => card.card_id);
       setSelectedCards(cards);
     }
   }, [data]);
@@ -88,26 +90,31 @@ export default function AllCardsCollection({
         <h1 className="scroll-m-20 pb-2 text-3xl font-bold first:mt-0">
           Collection {collection_name}
         </h1>
-        <div>
-          {isEditMode ? (
-            <div className="flex gap-5">
-              <Button onClick={handleSaveClick}>
-                Save
-                <Check />
-              </Button>
-              <Button variant={"destructive"} onClick={handleCancelClick}>
-                Cancel
-                <X />
-              </Button>
-            </div>
-          ) : (
-            <div className="flex gap-5">
-              <Button onClick={handleEditClick}>
-                Edit
-                <Pencil />
-              </Button>
-            </div>
-          )}
+        <div className="flex gap-5 items-center">
+          <p>
+            {data?.length} of {length}
+          </p>
+          <div>
+            {isEditMode ? (
+              <div className="flex gap-5">
+                <Button onClick={handleSaveClick}>
+                  Save
+                  <Check />
+                </Button>
+                <Button variant={"destructive"} onClick={handleCancelClick}>
+                  Cancel
+                  <X />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex gap-5">
+                <Button onClick={handleEditClick}>
+                  Edit
+                  <Pencil />
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <CardsCollection
@@ -116,6 +123,8 @@ export default function AllCardsCollection({
         isSelected={isCardSelected}
         isUpdated={isUpdatedCardSelected}
         isEditMode={isEditMode}
+        onLengthChange={setLength}
+        onLoadingChange={setLoading}
       />
     </div>
   );
