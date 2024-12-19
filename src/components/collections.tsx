@@ -1,4 +1,5 @@
 import { getAllCollections } from "@/app/_https/get-all-collections";
+import { CollectionInterface } from "@/app/_interface/collection-interface";
 import { useQuery } from "@tanstack/react-query";
 import CollectionSet from "./collection-set";
 
@@ -13,13 +14,13 @@ export default function Collections() {
 
   return (
     <div className="grid grid-cols-5 gap-10 justify-items-center">
-      {collections.map((collection: any) => {
+      {collections.map((collection: CollectionInterface) => {
         return (
           <CollectionSet
             key={collection.collection_id}
             set_id={collection.set_id}
             collection_id={collection.collection_id}
-            collection_name={collection.name}
+            name={collection.name}
           />
         );
       })}

@@ -10,6 +10,7 @@ export default function VisualCollection({
 }: VisualCollectionInterface) {
   const queryClient = useQueryClient();
   const router = useRouter();
+  console.log("Collection name Viseual Card: ", collection.name);
 
   function handleCollection() {
     console.log("Collection clicked");

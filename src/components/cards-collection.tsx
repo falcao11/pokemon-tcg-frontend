@@ -5,6 +5,15 @@ import { useEffect } from "react";
 import LoaderComponent from "./loader-component";
 import VisualCard from "./visual/visual-card";
 
+interface CardProps {
+  id: string;
+  name: string;
+  images: {
+    small: string;
+  };
+  number: number;
+}
+
 export default function CardsCollection({
   set_id,
   isEditMode,
@@ -36,7 +45,7 @@ SetProps) {
         <LoaderComponent />
       ) : (
         <div className="grid grid-cols-8 gap-10 justify-center">
-          {data?.cards.map((card: any) => {
+          {data?.cards.map((card: CardProps) => {
             return (
               <VisualCard
                 key={card.id}

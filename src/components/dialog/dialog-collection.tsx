@@ -67,7 +67,7 @@ export function DialogCollection() {
         <DialogHeader>
           <DialogTitle>Create Collection</DialogTitle>
           <DialogDescription>
-            Create a new collection to save another card's set
+            Create a new collection to save another card&apos;s set
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>

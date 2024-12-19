@@ -7,13 +7,15 @@ import VisualCollection from "./visual/visual-collection";
 export default function CollectionSet({
   set_id,
   collection_id,
-  collection_name,
+  name,
 }: CollectionInterface) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["set", set_id],
     queryFn: () => getSet(set_id),
     staleTime: 1000 * 60, // 60 seconds
   });
+
+  console.log("Collection name: ", collection_id);
 
   if (isLoading) return <LoaderComponent />;
   if (error) return <div key={collection_id}>Error loading set data</div>;
@@ -23,8 +25,8 @@ export default function CollectionSet({
       key={collection_id}
       collection={{
         collection_id: collection_id,
-        name: collection_name,
-        set_name: data?.name || collection_name,
+        name: name,
+        set_name: data?.name || name,
         img_url: data?.images?.logo || "/pokemon-tcg.png",
       }}
     />

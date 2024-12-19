@@ -44,16 +44,27 @@ export default function LoginForm() {
       await Login(values);
       console.log("Login successful");
       router.push("/app");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log("Error logging in");
-      form.setError("email", {
-        type: "string",
-        message: error.message,
-      });
-      form.setError("password", {
-        type: "string",
-        message: "",
-      });
+      if (error instanceof Error) {
+        form.setError("email", {
+          type: "string",
+          message: error.message,
+        });
+        form.setError("password", {
+          type: "string",
+          message: "",
+        });
+      } else {
+        form.setError("email", {
+          type: "string",
+          message: "An unknown error occurred",
+        });
+        form.setError("password", {
+          type: "string",
+          message: "",
+        });
+      }
     }
   }
 

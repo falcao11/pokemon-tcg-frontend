@@ -39,11 +39,7 @@ export default function AllCardsCollection({
       const cards = data?.cards.map((card: CardInterface) => card.card_id);
       setSelectedCards(cards);
     }
-    {
-      isLoading //  || isCardLoading
-        ? setLoading(false)
-        : setLoading(true);
-    }
+    isLoading /*  || isCardLoading */ ? setLoading(false) : setLoading(true);
   }, [data, isLoading]);
 
   const isUpdatedCardSelected = (cardId: string) =>
