@@ -8,6 +8,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Check, Pencil, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import CardImage from "./card-image";
+import LoaderComponent from "./loader-component";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 export default function AllCardsCollection({
   collection_name,
@@ -18,20 +21,30 @@ export default function AllCardsCollection({
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [updateSelectCards, setUpdateSelectCards] = useState<string[]>([]);
   const [length, setLength] = useState<number>(0);
+  const [isCardLoading, setIsCardLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
+  const [openImage, setOpenImage] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["cards-collection", params.collectionId],
     queryFn: () => userCardsCollection(params.collectionId),
     staleTime: 1000 * 60, // 60 seconds
   });
 
   useEffect(() => {
+    console.log("Is Loading AllCards: ", isLoading);
     if (Array.isArray(data?.cards)) {
       const cards = data?.cards.map((card: any) => card.card_id);
       setSelectedCards(cards);
     }
-  }, [data]);
+    {
+      isLoading //  || isCardLoading
+        ? setLoading(false)
+        : setLoading(true);
+    }
+  }, [data, isLoading]);
+
   const isUpdatedCardSelected = (cardId: string) =>
     updateSelectCards.includes(cardId);
 
@@ -45,6 +58,10 @@ export default function AllCardsCollection({
           ? prevSelectedCards.filter((id) => id !== cardId)
           : [...prevSelectedCards, cardId]
       );
+    } else {
+      console.log("Card clicked is: ", cardId);
+      setOpenImage(cardId);
+      setIsModalOpen(true);
     }
   };
 
@@ -85,47 +102,68 @@ export default function AllCardsCollection({
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex justify-between items-center">
-        <h1 className="scroll-m-20 pb-2 text-3xl font-bold first:mt-0">
-          Collection {collection_name}
-        </h1>
-        <div className="flex gap-5 items-center">
-          <p>
-            {data?.length} of {length}
-          </p>
-          <div>
-            {isEditMode ? (
-              <div className="flex gap-5">
-                <Button onClick={handleSaveClick}>
-                  Save
-                  <Check />
-                </Button>
-                <Button variant={"destructive"} onClick={handleCancelClick}>
-                  Cancel
-                  <X />
-                </Button>
+    <>
+      {loading ? (
+        <>
+          <div className="flex flex-col gap-10">
+            <div className="flex justify-between items-center">
+              <h1 className="scroll-m-20 pb-2 text-3xl font-bold first:mt-0">
+                Collection {collection_name}
+              </h1>
+              <div className="flex gap-5 items-center">
+                <p>
+                  {data?.length} of {length}
+                </p>
+                <div>
+                  {isEditMode ? (
+                    <div className="flex gap-5">
+                      <Button onClick={handleSaveClick}>
+                        Save
+                        <Check />
+                      </Button>
+                      <Button
+                        variant={"destructive"}
+                        onClick={handleCancelClick}
+                      >
+                        Cancel
+                        <X />
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-5">
+                      <Button onClick={handleEditClick}>
+                        Edit
+                        <Pencil />
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </div>
-            ) : (
-              <div className="flex gap-5">
-                <Button onClick={handleEditClick}>
-                  Edit
-                  <Pencil />
-                </Button>
-              </div>
-            )}
+            </div>
+            <CardsCollection
+              set_id={set_id}
+              onClick={handleCardClick}
+              isSelected={isCardSelected}
+              isUpdated={isUpdatedCardSelected}
+              isEditMode={isEditMode}
+              onLengthChange={setLength}
+              onIsLoadingChange={setIsCardLoading}
+            />
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger asChild>
+                <div />
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle></DialogTitle>
+
+                <CardImage card_id={openImage} />
+              </DialogContent>
+            </Dialog>
           </div>
-        </div>
-      </div>
-      <CardsCollection
-        set_id={set_id}
-        onClick={handleCardClick}
-        isSelected={isCardSelected}
-        isUpdated={isUpdatedCardSelected}
-        isEditMode={isEditMode}
-        onLengthChange={setLength}
-        onLoadingChange={setLoading}
-      />
-    </div>
+        </>
+      ) : (
+        <LoaderComponent />
+      )}
+    </>
   );
 }

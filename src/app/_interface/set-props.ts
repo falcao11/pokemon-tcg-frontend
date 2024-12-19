@@ -5,5 +5,5 @@ export interface SetProps {
   isUpdated: (card_id: string) => boolean;
   onClick: (card_id: string) => void;
   onLengthChange: (length: number) => void;
-  onLoadingChange: (loading: boolean) => void;
+  onIsLoadingChange: (isLoading: boolean) => void;
 }
