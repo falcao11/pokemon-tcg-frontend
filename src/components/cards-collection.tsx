@@ -12,6 +12,7 @@ export default function CardsCollection({
   isUpdated,
   onClick,
   onLengthChange,
+  onIsLoadingChange,
 }: SetProps) {
   const { data, isLoading } = useQuery({
     queryKey: ["cards", set_id],
@@ -20,10 +21,14 @@ export default function CardsCollection({
   });
 
   useEffect(() => {
+    console.log("Is Loading Cards: ", isLoading);
     if (data) {
-      onLengthChange(data.cards.length);
+      onLengthChange(data?.cards.length);
     }
-  }, [data, onLengthChange]);
+    {
+      isLoading ? onIsLoadingChange(true) : onIsLoadingChange(false);
+    }
+  }, [data, onLengthChange, isLoading]);
 
   return (
     <>
@@ -39,6 +44,7 @@ export default function CardsCollection({
                   card_id: card.id,
                   name: card.name,
                   img_url: card.images.small,
+                  number: card.number,
                 }}
                 onClick={() => onClick(card.id)}
                 isSelected={isSelected(card.id)}

@@ -30,16 +30,10 @@ export default function VisualCard({
           priority
         />
       </div>
-      <h1 className="text-center font-bold">{card.name}</h1>
+      <div className="flex gap-2 justify-center">
+        <h1 className="text-center font-bold">{card.number}</h1>
+        <h1 className="text-center font-bold">{card.name}</h1>
+      </div>
     </div>
   );
 }
-
-//  className={`shadow-lg cursor-pointer
-//    ${ isSelected
-//      ? "opacity-100"
-//      : "opacity-6"}
-//    ${isEditMode
-//        ? "transform transition duration-400 ease-in-out"
-//        : ""}
-// `}
