@@ -1,5 +1,6 @@
 import CreateCardCollection from "@/app/_https/create-card-collection";
 import userCardsCollection from "@/app/_https/get-user-cards-collection";
+import { CardInterface } from "@/app/_interface/card-interface";
 import { CollectionInterface } from "@/app/_interface/collection-interface";
 import { queryClient } from "@/app/services/query-client";
 import CardsCollection from "@/components/cards-collection";
@@ -21,7 +22,7 @@ export default function AllCardsCollection({
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [updateSelectCards, setUpdateSelectCards] = useState<string[]>([]);
   const [length, setLength] = useState<number>(0);
-  const [isCardLoading, setIsCardLoading] = useState<boolean>(true);
+  // const [isCardLoading, setIsCardLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [openImage, setOpenImage] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -35,7 +36,7 @@ export default function AllCardsCollection({
   useEffect(() => {
     console.log("Is Loading AllCards: ", isLoading);
     if (Array.isArray(data?.cards)) {
-      const cards = data?.cards.map((card: any) => card.card_id);
+      const cards = data?.cards.map((card: CardInterface) => card.card_id);
       setSelectedCards(cards);
     }
     {
@@ -147,7 +148,7 @@ export default function AllCardsCollection({
               isUpdated={isUpdatedCardSelected}
               isEditMode={isEditMode}
               onLengthChange={setLength}
-              onIsLoadingChange={setIsCardLoading}
+              // onIsLoadingChange={setIsCardLoading}
             />
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>

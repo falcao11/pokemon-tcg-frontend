@@ -15,11 +15,14 @@ export default async function middleware(req: NextRequest) {
   if (!cookie && isProtectedRoute) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
-  const response = await fetch((process.env.API_URL as string) + "/me", {
-    headers: {
-      Authorization: `Bearer ${cookie}`,
-    },
-  }).then((res) => res.json());
+  const response = await fetch(
+    (process.env.NEXT_PUBLIC_API_URL as string) + "/me",
+    {
+      headers: {
+        Authorization: `Bearer ${cookie}`,
+      },
+    }
+  ).then((res) => res.json());
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !response?.user_id) {

@@ -12,8 +12,8 @@ export default function CardsCollection({
   isUpdated,
   onClick,
   onLengthChange,
-  onIsLoadingChange,
-}: SetProps) {
+}: // onIsLoadingChange,
+SetProps) {
   const { data, isLoading } = useQuery({
     queryKey: ["cards", set_id],
     queryFn: () => getCardsCollection(set_id),
@@ -25,10 +25,10 @@ export default function CardsCollection({
     if (data) {
       onLengthChange(data?.cards.length);
     }
-    {
-      isLoading ? onIsLoadingChange(true) : onIsLoadingChange(false);
-    }
-  }, [data, onLengthChange, isLoading]);
+    // {
+    //   isLoading ? onIsLoadingChange(true) : onIsLoadingChange(false);
+    // }
+  }, [data, onLengthChange /*, isLoading*/]);
 
   return (
     <>
