@@ -44,7 +44,7 @@ export default function LoginForm() {
       await Login(values);
       console.log("Login successful");
       router.push("/app");
-    } catch (error: unknown) {
+    } catch (error) {
       console.log("Error logging in");
       if (error instanceof Error) {
         form.setError("email", {
