@@ -41,7 +41,7 @@ export default function AllCardsCollection({
         .filter((id): id is string => id !== undefined);
       setSelectedCards(cards);
     }
-    isLoading /*  || isCardLoading */ ? setLoading(false) : setLoading(true);
+    setLoading(!isLoading);
   }, [data, isLoading]);
 
   const isUpdatedCardSelected = (cardId: string) =>
