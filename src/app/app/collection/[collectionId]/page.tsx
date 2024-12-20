@@ -22,7 +22,7 @@ export default function Collection() {
       ) : (
         <AllCardsCollection
           collection_id={params.collectionId}
-          collection_name={data?.name}
+          name={data?.name}
           set_id={data?.set_id}
         />
       )}
