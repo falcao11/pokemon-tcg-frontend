@@ -45,26 +45,15 @@ export default function LoginForm() {
       console.log("Login successful");
       router.push("/app");
     } catch (error) {
-      console.log("Error logging in");
-      if (error instanceof Error) {
-        form.setError("email", {
-          type: "string",
-          message: error.message,
-        });
-        form.setError("password", {
-          type: "string",
-          message: "",
-        });
-      } else {
-        form.setError("email", {
-          type: "string",
-          message: "An unknown error occurred",
-        });
-        form.setError("password", {
-          type: "string",
-          message: "",
-        });
-      }
+      console.log("Error logging in: ", error);
+      form.setError("email", {
+        type: "string",
+        message: "Invalid email or password",
+      });
+      form.setError("password", {
+        type: "string",
+        message: "",
+      });
     }
   }
 
