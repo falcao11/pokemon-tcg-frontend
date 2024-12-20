@@ -1,5 +1,4 @@
 import { TanstackProvider } from "@/components/providers/tanstack-provider";
-import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
@@ -24,7 +23,6 @@ export default function RootLayout({
     <html lang="en" className={nunito.className}>
       <body>
         <TanstackProvider>{children}</TanstackProvider>
-        <Toaster />
       </body>
     </html>
   );

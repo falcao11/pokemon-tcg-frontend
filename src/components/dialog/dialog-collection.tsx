@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
@@ -32,7 +31,6 @@ const formSchema = z.object({
 });
 
 export function DialogCollection() {
-  const { toast } = useToast();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
@@ -49,7 +47,6 @@ export function DialogCollection() {
     if (result.success === false) {
       console.log("Error creating collection");
     } else {
-      toast({ variant: "success", description: "Collection created" });
       queryClient.invalidateQueries({ queryKey: ["collections"] });
       setOpen(false);
     }
