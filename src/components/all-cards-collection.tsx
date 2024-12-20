@@ -14,7 +14,7 @@ import LoaderComponent from "./loader-component";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 export default function AllCardsCollection({
-  collection_name,
+  name,
   set_id,
 }: CollectionInterface) {
   const params = useParams<{ collectionId: string }>();
@@ -36,7 +36,9 @@ export default function AllCardsCollection({
   useEffect(() => {
     console.log("Is Loading AllCards: ", isLoading);
     if (Array.isArray(data?.cards)) {
-      const cards = data?.cards.map((card: CardInterface) => card.card_id);
+      const cards = data?.cards
+        .map((card: CardInterface) => card.card_id)
+        .filter((id): id is string => id !== undefined);
       setSelectedCards(cards);
     }
     isLoading /*  || isCardLoading */ ? setLoading(false) : setLoading(true);
@@ -105,7 +107,7 @@ export default function AllCardsCollection({
           <div className="flex flex-col gap-10">
             <div className="flex justify-between items-center">
               <h1 className="scroll-m-20 pb-2 text-3xl font-bold first:mt-0">
-                Collection {collection_name}
+                Collection {name}
               </h1>
               <div className="flex gap-5 items-center">
                 <p>
