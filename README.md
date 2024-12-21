@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pokémon TCG
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+- [Running the Application](#running-the-application)
+- [WebSite Preview](#website-preview)
+- [Test Yourself](#test-yourself)
+
+## Overview
+
+This frontend is built using **Next.js** with **TypeScript** for creating a performant and scalable web application. **Tailwind CSS** is used for styling, and **shadcn/ui** provides accessible and customizable UI components. **Axios** is integrated for API requests, making data fetching seamless and efficient. <br>
+**WARNING: This app is not otimized to mobile devices yet!!**
+
+## Features
+
+- Modern and clean Ui design.
+- Fully responsive layout.
+- API integration using Axios.
+- Reusable and accessible components with shadcn.
+- Tailwind CSS for rapid styling and responsiveness.
+
+---
+
+## Technologies
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://www.prisma.io/)
+- [Axios](https://axios-http.com/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (>= 16.x)
+- [npm](https://www.npmjs.com/) (or [yarn](https://yarnpkg.com/))
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/falcao11/pokemon-tcg-frontend.git
+   cd pokemon-tcg-frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+### Environment Variables
+
+Create a `.env` file in the root directory and add the following variables.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXT_PUBLIC_API_URL="http://localhost:3333/api/v1"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running the Application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Run the application:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-## Learn More
+2. Open your browser and visit:
+   ```bash
+   http://localhost:3000
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## Website Preview
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. My Collections<br><br>
+   <img src=".github/collections.png"></img>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. My Cards by Collection<br><br>
+   <img src=".github/cards-collection.png"></img>
 
-## Deploy on Vercel
+## Test Yourself
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[You can try it there if you want!](https://pokemontcg-two.vercel.app/)
